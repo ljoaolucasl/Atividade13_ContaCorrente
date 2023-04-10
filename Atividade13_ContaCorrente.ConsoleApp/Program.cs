@@ -13,20 +13,43 @@
             conta1.Depositar(50);
 
             Console.WriteLine(conta1.VisualizarLimite());
+            
+            PulaLinha();
 
             Console.WriteLine(conta1.VisualizarSaldo());
+
+            PulaLinha();
 
             conta1.PagarCartao(200);
 
             Console.WriteLine(conta1.VisualizarLimite());
 
+            PulaLinha();
+
             Console.WriteLine(conta1.VisualizarSaldo());
+
+            PulaLinha();
 
             Console.WriteLine(conta2.VisualizarSaldo());
 
+            PulaLinha();
+
             Console.WriteLine(conta2.VisualizarLimite());
 
+            PulaLinha();
+
+            conta1.VisualizarMovimentacoes();
+
+            PulaLinha();
+
+            conta2.VisualizarMovimentacoes();
+
             Console.ReadLine();
+        }
+
+        public static void PulaLinha()
+        {
+            Console.WriteLine();
         }
     }
 }

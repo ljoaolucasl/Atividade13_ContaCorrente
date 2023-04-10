@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,18 +10,28 @@ namespace Atividade13_ContaCorrente.ConsoleApp
     public class ContaCorrente
     {
         private int numeroCliente;
-        private int saldoCliente;
-        private int limiteCliente;
-        private int limiteTotalCliente;
+        private double saldoCliente;
+        private double limiteCliente;
+        private double limiteTotalCliente;
         private bool especialCliente;
 
-        public ContaCorrente(int numero, int saldo, int limite, bool especial)
+        private ArrayList movimentacoes = new ArrayList();
+
+        public ContaCorrente(int numero, double saldo, double limite, bool especial)
         {
             numeroCliente = numero;
             saldoCliente = saldo;
             limiteCliente = limite;
             limiteTotalCliente = limite;
             especialCliente = especial;
+        }
+
+        public void VisualizarMovimentacoes()
+        {
+            foreach (var movimentacao in movimentacoes)
+            {
+                Console.WriteLine(movimentacao);
+            }
         }
 
         public string VisualizarSaldo()
@@ -30,23 +41,26 @@ namespace Atividade13_ContaCorrente.ConsoleApp
 
         public string VisualizarLimite()
         {
-            return $"Cliente({numeroCliente}) seu limite Total é de R${limiteTotalCliente} e no momento você possuí R${limiteCliente} de limite";
+            return $"Cliente({numeroCliente}) seu limite Total é de R${limiteTotalCliente} e no momento você possuí R${limiteCliente} de limite no cartão";
         }
 
-        public void Sacar(int valor)
+        public void Sacar(double valor)
         {
             if (valor > saldoCliente)
                 return;
 
             saldoCliente -= valor;
+
+            movimentacoes.Add($"Saque de R${valor} em {DateTime.Now}");
         }
 
-        public void Depositar(int valor)
+        public void Depositar(double valor)
         {
             saldoCliente += valor;
+            movimentacoes.Add($"Depósito de R${valor} em {DateTime.Now}");
         }
 
-        public void Tranferir(int valor, string tipoDePagamento, ContaCorrente conta)
+        public void Tranferir(double valor, string tipoDePagamento, ContaCorrente conta)
         {
             if (tipoDePagamento == "debito")
             {
@@ -55,6 +69,8 @@ namespace Atividade13_ContaCorrente.ConsoleApp
 
                 saldoCliente -= valor;
                 conta.saldoCliente += valor;
+                movimentacoes.Add($"Transferência no Débito para {conta.numeroCliente} no valor de R${valor} em {DateTime.Now}");
+                conta.movimentacoes.Add($"Transferência no Débito recebido de {numeroCliente} no valor de R${valor} em {DateTime.Now}");
             }
             else if (tipoDePagamento == "credito")
             {
@@ -63,10 +79,12 @@ namespace Atividade13_ContaCorrente.ConsoleApp
 
                 limiteCliente -= valor;
                 conta.saldoCliente += valor;
+                movimentacoes.Add($"Transferência no Crédito para {conta.numeroCliente} no valor de R${valor} em {DateTime.Now}");
+                conta.movimentacoes.Add($"Transferência no Crédito recebido de {numeroCliente} no valor de R${valor} em {DateTime.Now}");
             }
         }
 
-        public void PagarCartao(int valor)
+        public void PagarCartao(double valor)
         {
             if (valor > saldoCliente)
                 return;
@@ -76,6 +94,7 @@ namespace Atividade13_ContaCorrente.ConsoleApp
 
             limiteCliente += valor;
             saldoCliente -= valor;
+            movimentacoes.Add($"Cartão pago no valor de R${valor} em {DateTime.Now}");
         }
     }
 }
