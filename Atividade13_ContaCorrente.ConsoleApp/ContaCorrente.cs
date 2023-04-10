@@ -46,10 +46,14 @@ namespace Atividade13_ContaCorrente.ConsoleApp
 
         public void Sacar(double valor)
         {
-            if (valor > saldoCliente)
-                return;
+            if (valor <= saldoCliente)
+                saldoCliente -= valor;
 
-            saldoCliente -= valor;
+            else if (valor <= limiteCliente)
+                limiteCliente -= valor;
+
+            else
+                return;
 
             movimentacoes.Add($"Saque de R${valor} em {DateTime.Now}");
         }
