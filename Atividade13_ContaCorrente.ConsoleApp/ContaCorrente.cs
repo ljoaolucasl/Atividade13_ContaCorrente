@@ -6,36 +6,6 @@ using System.Threading.Tasks;
 
 namespace Atividade13_ContaCorrente.ConsoleApp
 {
-    /*  Uma conta corrente possui um número,------------------------
-
-     *  um saldo,---------------------------------------------------
-
-     *  um status que informa se ela é especial ou não,-------------
-
-     *  um limite---------------------------------------------------
-
-     *  visualização de saldo,--------------------------------------
-
-     *  visualização de extrato-------------------------------------
-
-     *  Não precisa implementar a interação com usuário.------------
-
-     */
-
-    /* Uma movimentação possui um valor e uma informação se ela é uma movimentação de crédito ou débito.-------------
-
-     *  Cada conta terá operações de saques,-------------------------------------------------------------------------
-
-     * depósitos,----------------------------------------------------------------------------------------------------
-
-     *  e transferência entre contas.--------------------------------------------------------------------------------
-
-     *  fazer saques desde que o valor não exceda o limite de saque que é o limite + saldo.--------------------------
-     
-    */
-
-
-
     public class ContaCorrente
     {
         private int numeroCliente;
