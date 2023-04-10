@@ -12,6 +12,8 @@
 
             conta1.Depositar(50);
 
+            conta1.Sacar(200);
+
             Console.WriteLine(conta1.VisualizarLimite());
             
             PulaLinha();
